@@ -15,7 +15,8 @@ export function getSuite1(suite) {
       view.update(data());
     })
     .add('React', () => {
-      ReactDOM.render(React.createElement(Component, {data: data()}), root);
+      let component = ReactDOM.render(React.createElement(Component), root);
+      component.setState(data());
     })
     .add('Template string', () => {
       root.innerHTML = templateString(data());
@@ -27,7 +28,7 @@ export function getSuite2(suite) {
   let root2 = document.createElement('div');
   let root3 = document.createElement('div');
   let view = Monkberry.render(Template, root1);
-  let component = ReactDOM.render(React.createElement(Component, {data: data()}), root2);
+  let component = ReactDOM.render(React.createElement(Component), root2);
 
   return suite
     .add('Monkberry', () => {

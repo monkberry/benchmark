@@ -2,7 +2,8 @@ import accounting from 'accounting';
 window._ = require('lodash');
 window.Benchmark = require('benchmark');
 import * as tickets from './ticket-rendering/bundle';
-import * as todos from './ticket-rendering/bundle';
+import * as todos from './todos-rendering/bundle';
+import * as singlePoint from './single-point-rendering/bundle';
 
 window.firstRendeing = function firstRendeing() {
   run(tickets.getSuite1(new Benchmark.Suite()));
@@ -13,7 +14,12 @@ window.repeatedRendering = function repeatedRendering() {
 }
 
 window.todosRendering = function todosRendering() {
-  run(todos.getSuite2(new Benchmark.Suite()));
+  //todos.test();
+  run(todos.getSuite1(new Benchmark.Suite()));
+}
+
+window.singlePointRendering = function singlePointRendering() {
+  run(singlePoint.getSuite1(new Benchmark.Suite()));
 }
 
 function run(suite) {
@@ -30,6 +36,7 @@ function run(suite) {
       });
     })
     .on('complete', function onComplete() {
+      console.log(JSON.stringify(data));
       print(template([data]));
       print(`Fastest is <b>${this.filter('fastest').map('name')}</b>`);
     });
@@ -41,7 +48,7 @@ function run(suite) {
   }, 500);
 }
 
-function template(data) {
+window.template = function template(data) {
   let max = 0;
   for (let result of data) {
     for(let row of result.rows) {
@@ -52,20 +59,22 @@ function template(data) {
   }
 
   return data.map(({title, rows}) => `
-    <h3>${title}</h3>
-    ${rows.map(({name, hz, rme, sample}) => `
-      <div class="line ${name.toLowerCase().replace(' ', '-')}" style="width: ${100 * hz / max}%;">
-          <small>
-            <b>${name}</b>
-            ${accounting.formatNumber(hz, hz < 100 ? 2 : 0, ' ')} op/sec
-            ±${rme.toFixed(2)}% (${sample} runs sampled)
-          </small>
-      </div>
-    `).join(``)}
+    <section>
+      <h3>${title}</h3>
+      ${rows.map(({name, hz, rme, sample}) => `
+        <div class="line ${name.toLowerCase().replace(' ', '-')}" style="width: ${100 * hz / max}%;">
+            <small>
+              <b>${name}</b>
+              ${accounting.formatNumber(hz, hz < 100 ? 2 : 0, ' ')} op/sec
+              ±${rme.toFixed(2)}% (${sample} runs sampled)
+            </small>
+        </div>
+      `).join(``)}
+    </section>
   `).join(``);
 }
 
-function print(message) {
+window.print = function print(message) {
   let div = document.createElement('div');
   div.innerHTML = message;
   document.body.appendChild(div);

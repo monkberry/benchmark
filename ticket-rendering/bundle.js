@@ -99,7 +99,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var view = _monkberry2.default.render(_template2.default, root);
 	    view.update((0, _data2.default)());
 	  }).add('React', function () {
-	    _reactDom2.default.render(_react2.default.createElement(_template4.default, { data: (0, _data2.default)() }), root);
+	    var component = _reactDom2.default.render(_react2.default.createElement(_template4.default), root);
+	    component.setState((0, _data2.default)());
 	  }).add('Template string', function () {
 	    root.innerHTML = (0, _templateString2.default)((0, _data2.default)());
 	  });
@@ -110,7 +111,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var root2 = document.createElement('div');
 	  var root3 = document.createElement('div');
 	  var view = _monkberry2.default.render(_template2.default, root1);
-	  var component = _reactDom2.default.render(_react2.default.createElement(_template4.default, { data: (0, _data2.default)() }), root2);
+	  var component = _reactDom2.default.render(_react2.default.createElement(_template4.default), root2);
 
 	  return suite.add('Monkberry', function () {
 	    view.update((0, _data2.default)());
@@ -22358,7 +22359,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  displayName: "exports",
 
 	  render: function render() {
-	    var data = this.props.data;
+	    var data = this.state;
+	    if (!data) {
+	      return null;
+	    }
 	    return React.createElement(
 	      "div",
 	      { "class": "ticket-outer-wrap", "data-rating": data.ticket_rating },

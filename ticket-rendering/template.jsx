@@ -2,7 +2,10 @@ var React = require('react');
 
 module.exports = React.createClass({
   render: function () {
-    let data = this.props.data;
+    let data = this.state;
+    if(!data) {
+      return null;
+    }
     return (
       <div class="ticket-outer-wrap" data-rating={data.ticket_rating}>
         {data.highlight_info ?

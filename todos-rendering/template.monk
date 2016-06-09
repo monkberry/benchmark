@@ -1,0 +1,11 @@
+<ol>
+  {% for todos  %}
+    <li>
+      {% if complete %}
+        <s>{{ title }}</s>
+      {% else %}
+        <b>{{ title }}</b>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ol>
