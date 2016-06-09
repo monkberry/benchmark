@@ -62,3 +62,8 @@ a:hover {
   color: #9D58DC;
   text-decoration: none;
 }
+
+footer {
+  font-size: 12px;
+  text-align: right;
+}
