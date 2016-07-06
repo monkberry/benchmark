@@ -14,25 +14,25 @@
   print(`<h2>First rendering <a href="first-rendering.html">Run benchmark</h2>`);
   print('<p>Benchmark compare first time rendering of complex template. It shows how quickly the user can see an interface. For html markup was used real template of airline ticket and real data of representing tickets.</p>')
   print(template([
-    {"title":"Chrome 50","rows":[{"name":"Monkberry","hz":450.36707723760685,"rme":11.665324660165062,"sample":41},{"name":"React","hz":19.514310494362533,"rme":29.75709873651186,"sample":30},{"name":"Template string","hz":317.5864290315654,"rme":4.5746732524874245,"sample":51}]},
-    {"title":"Safari 9","rows":[{"name":"Monkberry","hz":722.0408560538255,"rme":20.89853458557821,"sample":44},{"name":"React","hz":20.578147966682995,"rme":25.063073897130973,"sample":35},{"name":"Template string","hz":524.2512556470119,"rme":2.63054638231409,"sample":55}]},
-    {"title":"Firefox 43","rows":[{"name":"Monkberry","hz":331.03630537791594,"rme":6.818203754862222,"sample":41},{"name":"React","hz":20.69175372755858,"rme":10.110947033950087,"sample":34},{"name":"Template string","hz":382.59360766606864,"rme":10.248383731147797,"sample":49}]}
+    {"title":"Chrome 51","rows":[{"name":"Monkberry","hz":391.37798683954713,"rme":14.234600874567462,"sample":38},{"name":"React","hz":203.37130660299044,"rme":24.05931778402464,"sample":49},{"name":"Template string","hz":302.0284009191449,"rme":12.538929091427306,"sample":45}]},
+    {"title":"Safari 9","rows":[{"name":"Monkberry","hz":680.2075984221606,"rme":43.92318379264745,"sample":42},{"name":"React","hz":202.40210536515454,"rme":8.994500702493701,"sample":49},{"name":"Template string","hz":552.8777160102533,"rme":3.584710703035411,"sample":54}]},
+    {"title":"Firefox 47","rows":[{"name":"Monkberry","hz":431.176340372591,"rme":5.624565890237097,"sample":50},{"name":"React","hz":68.33177668645115,"rme":13.524864974134578,"sample":36},{"name":"Template string","hz":392.5910868239486,"rme":11.475856868231475,"sample":48}]}
   ]));
 
   print(`<h2>Repeated rendering <a href="repeated-rendering.html">Run benchmark</h2></h2>`);
   print(`<p>This benchmark is same as the previous, but it does not rerender entire template, it's updates data of template with <i>update</i> and <i>setState</i> methods.</p>`)
   print(template([
-    {"title":"Chrome 50","rows":[{"name":"Monkberry","hz":4187.4379109975025,"rme":2.0388157686857156,"sample":55},{"name":"React","hz":43.80761157251073,"rme":4.118668714519134,"sample":40},{"name":"Template string","hz":521.4133706856659,"rme":3.2479879136406007,"sample":49}]},
-    {"title":"Safari 9","rows":[{"name":"Monkberry","hz":3039.806996381182,"rme":1.8667659278692053,"sample":56},{"name":"React","hz":40.90169649082035,"rme":3.096774120089401,"sample":44},{"name":"Template string","hz":545.9575227556668,"rme":1.6690347309286133,"sample":56}]},
-    {"title":"Firefox 43","rows":[{"name":"Monkberry","hz":887.7603424034543,"rme":4.816908592403261,"sample":52},{"name":"React","hz":37.03703703703703,"rme":12.827593151053982,"sample":33},{"name":"Template string","hz":349.8330132362769,"rme":10.493689739828941,"sample":47}]}
+    {"title":"Chrome 51","rows":[{"name":"Monkberry","hz":1258.7140490369125,"rme":14.320953203586939,"sample":45},{"name":"React","hz":390.69336490451434,"rme":4.885652044039909,"sample":46},{"name":"Template string","hz":395.2633728052267,"rme":8.079336321188588,"sample":44}]},
+    {"title":"Safari 9","rows":[{"name":"Monkberry","hz":3764.090177133656,"rme":2.6236706331510202,"sample":55},{"name":"React","hz":346.93535506896313,"rme":3.025461207211743,"sample":51},{"name":"Template string","hz":556.4676528391648,"rme":4.796118816642239,"sample":55}]},
+    {"title":"Firefox 47","rows":[{"name":"Monkberry","hz":1174.8243905035683,"rme":9.57037840799747,"sample":51},{"name":"React","hz":108.95738821557333,"rme":11.154923855936033,"sample":39},{"name":"Template string","hz":358.4588569040869,"rme":9.78345779517253,"sample":44}]}
   ]));
 
   print(`<h2>Todos rendering <a href="todos-rendering.html">Run benchmark</h2></h2>`);
   print(`<p>In this benchmark compare rendering of todo list (11 items) with random data. Using <i>update</i> and <i>setState</i> methods.</p>`);
   print(template([
-    {"title":"Chrome 50","rows":[{"name":"Monkberry","hz":15913.12270494135,"rme":3.09510274131548,"sample":51},{"name":"React","hz":440.3631110741602,"rme":2.4300359703149264,"sample":53},{"name":"Template string","hz":9394.024463605378,"rme":1.919037202840427,"sample":48}]},
-    {"title":"Safari 9","rows":[{"name":"Monkberry","hz":24065.96662639498,"rme":1.862322646613597,"sample":56},{"name":"React","hz":404.94683105692087,"rme":2.633307037567636,"sample":54},{"name":"Template string","hz":10613.58710836782,"rme":2.114333121995621,"sample":56}]},
-    {"title":"Firefox 43","rows":[{"name":"Monkberry","hz":19587.18119176519,"rme":3.186836288005427,"sample":52},{"name":"React","hz":361.02761249765797,"rme":7.1071963222921415,"sample":43},{"name":"Template string","hz":7855.516293678835,"rme":2.4319549322652962,"sample":41}]}
+    {"title":"Chrome 51","rows":[{"name":"Monkberry","hz":20428.889338458433,"rme":3.0581614224715814,"sample":55},{"name":"React","hz":3086.3818832204024,"rme":3.4632315939127576,"sample":55},{"name":"Template string","hz":9849.378615106893,"rme":2.492047388975986,"sample":56}]},
+    {"title":"Safari 9","rows":[{"name":"Monkberry","hz":46490.57169835192,"rme":1.8025641686953622,"sample":55},{"name":"React","hz":3419.795337995352,"rme":1.9798381413044617,"sample":57},{"name":"Template string","hz":11207.285686002771,"rme":1.4040151930479903,"sample":58}]},
+    {"title":"Firefox 47","rows":[{"name":"Monkberry","hz":18153.379815751276,"rme":3.642337913856312,"sample":55},{"name":"React","hz":1337.9082896318425,"rme":8.092576317864111,"sample":46},{"name":"Template string","hz":8316.26470637598,"rme":7.677475148996791,"sample":52}]}
   ]));
 </script>
 <footer>
