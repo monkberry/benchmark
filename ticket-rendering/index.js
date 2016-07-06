@@ -1,8 +1,13 @@
 import Monkberry from 'monkberry';
 import Template from './template.monk';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Component from './template.jsx';
+import ReactComponent from './template.jsx';
+
+import Vue from 'vue';
+import VueComponent from './template.vue';
+
 import templateString from './templateString';
 import data from './data';
 
@@ -15,8 +20,18 @@ export function getSuite1(suite) {
       view.update(data());
     })
     .add('React', () => {
-      let component = ReactDOM.render(React.createElement(Component), root);
-      component.setState(data());
+      let reactComponent = ReactDOM.render(React.createElement(ReactComponent), root);
+      reactComponent.setState(data());
+    })
+    .add('Vue', {
+      'defer': true,
+      'fn': deferred => {
+        let vueComponent = new Vue(VueComponent).$mount(root);
+        vueComponent.$data = data();
+        Vue.nextTick(() => {
+           deferred.resolve();
+        });
+      }
     })
     .add('Template string', () => {
       root.innerHTML = templateString(data());
@@ -27,17 +42,29 @@ export function getSuite2(suite) {
   let root1 = document.createElement('div');
   let root2 = document.createElement('div');
   let root3 = document.createElement('div');
+  let root4 = document.createElement('div');
   let view = Monkberry.render(Template, root1);
-  let component = ReactDOM.render(React.createElement(Component), root2);
+  let reactComponent = ReactDOM.render(React.createElement(ReactComponent), root2);
+  let vueComponent = new Vue(VueComponent).$mount(root3);
+  root4.innerHTML = templateString(data());
 
   return suite
     .add('Monkberry', () => {
       view.update(data());
     })
     .add('React', () => {
-      component.setState(data());
+      reactComponent.setState(data());
+    })
+    .add('Vue', {
+      'defer': true,
+      'fn': deferred => {
+        vueComponent.$data = data();
+        Vue.nextTick(() => {
+           deferred.resolve();
+        });
+      }
     })
     .add('Template string', () => {
-      root3.innerHTML = templateString(data());
+      root4.innerHTML = templateString(data());
     });
 }

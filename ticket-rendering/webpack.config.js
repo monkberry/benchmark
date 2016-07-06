@@ -17,8 +17,17 @@ module.exports = {
       {
         test: /\.monk?$/,
         loader: 'monkberry-loader'
+      },
+      {
+        test: /\.vue?$/,
+        loader: 'vue-loader'
       }
     ]
+  },
+  vue: {
+    loaders: {
+        js: 'babel'
+      }
   },
   plugins: [
     new webpack.DefinePlugin({
