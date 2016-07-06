@@ -28,8 +28,14 @@ export function getSuite1(suite) {
     .add('React', () => {
       reactComponent.setState(data());
     })
-    .add('Vue', () => {
-      vueComponent.$data = data();
+    .add('Vue', {
+      'defer': true,
+      'fn': deferred => {
+        vueComponent.$data = data();
+        Vue.nextTick(() => {
+           deferred.resolve();
+        });
+      }
     })
     .add('Template string', () => {
       root4.innerHTML = templateString(data());

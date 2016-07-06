@@ -23,9 +23,15 @@ export function getSuite1(suite) {
       let reactComponent = ReactDOM.render(React.createElement(ReactComponent), root);
       reactComponent.setState(data());
     })
-    .add('Vue', () => {
-      let vueComponent = new Vue(VueComponent).$mount(root);
-      vueComponent.$data = data();
+    .add('Vue', {
+      'defer': true,
+      'fn': deferred => {
+        let vueComponent = new Vue(VueComponent).$mount(root);
+        vueComponent.$data = data();
+        Vue.nextTick(() => {
+           deferred.resolve();
+        });
+      }
     })
     .add('Template string', () => {
       root.innerHTML = templateString(data());
@@ -49,8 +55,14 @@ export function getSuite2(suite) {
     .add('React', () => {
       reactComponent.setState(data());
     })
-    .add('Vue', () => {
-      vueComponent.$data = data();
+    .add('Vue', {
+      'defer': true,
+      'fn': deferred => {
+        vueComponent.$data = data();
+        Vue.nextTick(() => {
+           deferred.resolve();
+        });
+      }
     })
     .add('Template string', () => {
       root4.innerHTML = templateString(data());

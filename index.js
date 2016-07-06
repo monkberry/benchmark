@@ -44,7 +44,7 @@ function run(suite) {
   print('Starting tests...');
 
   setTimeout(() => {
-    suite.run();
+    suite.run({async: true});
   }, 500);
 }
 
