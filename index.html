@@ -14,25 +14,25 @@
   print(`<h2>First rendering <a href="first-rendering.html">Run benchmark</h2>`);
   print('<p>Benchmark compare first time rendering of complex template. It shows how quickly the user can see an interface. For html markup was used real template of airline ticket and real data of representing tickets.</p>')
   print(template([
-    {"title":"Chrome 51","rows":[{"name":"Monkberry","hz":391.37798683954713,"rme":14.234600874567462,"sample":38},{"name":"React","hz":203.37130660299044,"rme":24.05931778402464,"sample":49},{"name":"Template string","hz":302.0284009191449,"rme":12.538929091427306,"sample":45}]},
-    {"title":"Safari 9","rows":[{"name":"Monkberry","hz":680.2075984221606,"rme":43.92318379264745,"sample":42},{"name":"React","hz":202.40210536515454,"rme":8.994500702493701,"sample":49},{"name":"Template string","hz":552.8777160102533,"rme":3.584710703035411,"sample":54}]},
-    {"title":"Firefox 47","rows":[{"name":"Monkberry","hz":431.176340372591,"rme":5.624565890237097,"sample":50},{"name":"React","hz":68.33177668645115,"rme":13.524864974134578,"sample":36},{"name":"Template string","hz":392.5910868239486,"rme":11.475856868231475,"sample":48}]}
+    {"title":"Chrome 51","rows":[{"name":"Monkberry","hz":332.40510039572035,"rme":26.397818660430566,"sample":36},{"name":"React","hz":227.20500811446462,"rme":6.709322155066541,"sample":51},{"name":"Vue","hz":33.033584143879615,"rme":15.374397119007838,"sample":36},{"name":"Template string","hz":245.63315920287786,"rme":49.224885558769515,"sample":38}]},
+    {"title":"Safari 9","rows":[{"name":"Monkberry","hz":753.3329966670036,"rme":4.977820780691973,"sample":51},{"name":"React","hz":178.55851201239997,"rme":12.834442048606387,"sample":48},{"name":"Vue","hz":63.26298274805151,"rme":9.368578596335313,"sample":43},{"name":"Template string","hz":497.47877147410026,"rme":8.911593261980197,"sample":53}]},
+    {"title":"Firefox 47","rows":[{"name":"Monkberry","hz":340.604220392965,"rme":8.572760504676252,"sample":40},{"name":"React","hz":75.90452897022857,"rme":7.659403794951272,"sample":40},{"name":"Vue","hz":29.477731496315283,"rme":12.418682990466612,"sample":46},{"name":"Template string","hz":273.728813559322,"rme":22.95904427452392,"sample":38}]}
   ]));
 
   print(`<h2>Repeated rendering <a href="repeated-rendering.html">Run benchmark</h2></h2>`);
   print(`<p>This benchmark is same as the previous, but it does not rerender entire template, it's updates data of template with <i>update</i> and <i>setState</i> methods.</p>`)
   print(template([
-    {"title":"Chrome 51","rows":[{"name":"Monkberry","hz":1258.7140490369125,"rme":14.320953203586939,"sample":45},{"name":"React","hz":390.69336490451434,"rme":4.885652044039909,"sample":46},{"name":"Template string","hz":395.2633728052267,"rme":8.079336321188588,"sample":44}]},
-    {"title":"Safari 9","rows":[{"name":"Monkberry","hz":3764.090177133656,"rme":2.6236706331510202,"sample":55},{"name":"React","hz":346.93535506896313,"rme":3.025461207211743,"sample":51},{"name":"Template string","hz":556.4676528391648,"rme":4.796118816642239,"sample":55}]},
-    {"title":"Firefox 47","rows":[{"name":"Monkberry","hz":1174.8243905035683,"rme":9.57037840799747,"sample":51},{"name":"React","hz":108.95738821557333,"rme":11.154923855936033,"sample":39},{"name":"Template string","hz":358.4588569040869,"rme":9.78345779517253,"sample":44}]}
+    {"title":"Chrome 51","rows":[{"name":"Monkberry","hz":1986.7834944130777,"rme":3.1572855230101524,"sample":52},{"name":"React","hz":390.1012981643353,"rme":6.389710341330276,"sample":51},{"name":"Vue","hz":48.998638926696486,"rme":6.936412585425882,"sample":42},{"name":"Template string","hz":417.4517140076256,"rme":16.30476012993342,"sample":55}]},
+    {"title":"Safari 9","rows":[{"name":"Monkberry","hz":2967.287504753749,"rme":0.9367481965365249,"sample":58},{"name":"React","hz":339.96445445543924,"rme":2.2235041414982857,"sample":50},{"name":"Vue","hz":93.78351033860208,"rme":5.467759283041895,"sample":43},{"name":"Template string","hz":516.7112640451505,"rme":1.991097077665171,"sample":54}]},
+    {"title":"Firefox 47","rows":[{"name":"Monkberry","hz":1528.7591240875906,"rme":4.19601939786283,"sample":51},{"name":"React","hz":104.49306741618365,"rme":7.922147562732436,"sample":37},{"name":"Vue","hz":41.81832262061488,"rme":17.20052021150052,"sample":36},{"name":"Template string","hz":338.10257539071097,"rme":20.05654743328353,"sample":48}]}
   ]));
 
   print(`<h2>Todos rendering <a href="todos-rendering.html">Run benchmark</h2></h2>`);
   print(`<p>In this benchmark compare rendering of todo list (11 items) with random data. Using <i>update</i> and <i>setState</i> methods.</p>`);
   print(template([
-    {"title":"Chrome 51","rows":[{"name":"Monkberry","hz":20428.889338458433,"rme":3.0581614224715814,"sample":55},{"name":"React","hz":3086.3818832204024,"rme":3.4632315939127576,"sample":55},{"name":"Template string","hz":9849.378615106893,"rme":2.492047388975986,"sample":56}]},
-    {"title":"Safari 9","rows":[{"name":"Monkberry","hz":46490.57169835192,"rme":1.8025641686953622,"sample":55},{"name":"React","hz":3419.795337995352,"rme":1.9798381413044617,"sample":57},{"name":"Template string","hz":11207.285686002771,"rme":1.4040151930479903,"sample":58}]},
-    {"title":"Firefox 47","rows":[{"name":"Monkberry","hz":18153.379815751276,"rme":3.642337913856312,"sample":55},{"name":"React","hz":1337.9082896318425,"rme":8.092576317864111,"sample":46},{"name":"Template string","hz":8316.26470637598,"rme":7.677475148996791,"sample":52}]}
+    {"title":"Chrome 51","rows":[{"name":"Monkberry","hz":18783.16570295868,"rme":3.4984976795543714,"sample":53},{"name":"React","hz":2823.41348189452,"rme":12.21693673129056,"sample":53},{"name":"Vue","hz":355.14333929416966,"rme":23.562926562667496,"sample":40},{"name":"Template string","hz":9408.961608205971,"rme":4.592031921107891,"sample":51}]},
+    {"title":"Safari 9","rows":[{"name":"Monkberry","hz":42428.093473903304,"rme":1.0775777687518107,"sample":59},{"name":"React","hz":3281.939665782275,"rme":1.5620159053133285,"sample":57},{"name":"Vue","hz":612.6291618828933,"rme":2.609237753629437,"sample":46},{"name":"Template string","hz":11305.771919312958,"rme":1.5818388608091076,"sample":58}]},
+    {"title":"Firefox 47","rows":[{"name":"Monkberry","hz":19638.142235099735,"rme":4.187175873762269,"sample":54},{"name":"React","hz":1316.1090587393383,"rme":5.129621937291644,"sample":46},{"name":"Vue","hz":245.58015658101436,"rme":14.911133364413212,"sample":36},{"name":"Template string","hz":8318.731417244799,"rme":6.868531837688405,"sample":43}]}
   ]));
 </script>
 <footer>
