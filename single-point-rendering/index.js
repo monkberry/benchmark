@@ -25,13 +25,18 @@ export function getSuite1(suite) {
     .add('Monkberry', () => {
       view.update(data());
     })
-    .add('React', () => {
-      reactComponent.setState(data());
+    .add('React', {
+      defer: true,
+      fn: deferred => {
+        reactComponent.setState(data(), () => {
+          deferred.resolve();
+        });
+      }
     })
     .add('Vue', {
-      'defer': true,
-      'fn': deferred => {
-        vueComponent.$data = data();
+      defer: true,
+      fn: deferred => {
+        vueComponent.text = data().text;
         Vue.nextTick(() => {
            deferred.resolve();
         });
@@ -61,7 +66,7 @@ export function test() {
   setInterval(() => {
     view.update(data());
     reactComponent.setState(data());
-    vueComponent.$data = data();
+    vueComponent.text = data().text;
     root4.innerHTML = templateString(data());
   }, 500);
 }

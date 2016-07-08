@@ -1,10 +1,8 @@
 <template>
-  <ol v-for="todo in todos">
-    <li v-if="todo.complete">
-      <s>{{ todo.title }}</s>
-    </li>
-    <li v-else>
-      <b>{{ todo.title }}</b>
+  <ol>
+    <li v-for="todo in todos">
+      <s v-if="todo.complete">{{ todo.title }}</s>
+      <b v-else>{{ todo.title }}</b>
     </li>
   </ol>
 </template>

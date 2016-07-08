@@ -16,31 +16,31 @@ import templateString from './templateString';
 import data from './data';
 
 export function getSuite1(suite) {
-  let root = document.createElement('div');
-
   return suite
     .add('Monkberry', () => {
-      let view = Monkberry.render(Template, root);
+      const root = document.createElement('div');
+      const view = Monkberry.render(Template, root);
       view.update(data());
     })
-    .add('React', () => {
-      let reactComponent = ReactDOM.render(React.createElement(ReactComponent), root);
-      reactComponent.setState(data());
-    })
-    .add('Vue', {
-      'defer': true,
-      'fn': deferred => {
-        let vueComponent = new Vue(VueComponent).$mount(root);
-        vueComponent.$data = data();
-        Vue.nextTick(() => {
-           deferred.resolve();
+    .add('React', {
+      defer: true,
+      fn: deferred => {
+        const root = document.createElement('div');
+        ReactDOM.render(React.createElement(ReactComponent), root, () => {
+          deferred.resolve();
         });
       }
     })
     .add('Inferno', () => {
+      const root = document.createElement('div');
       InfernoDOM.render(Inferno.createVNode().setTag(InfernoComponent).setAttrs(data()), root);
     })
+    .add('Vue', () => {
+      const root = document.createElement('div');
+      new Vue(VueComponent).$mount(root);
+    })
     .add('Template string', () => {
+      const root = document.createElement('div');
       root.innerHTML = templateString(data());
     });
 }
@@ -61,13 +61,18 @@ export function getSuite2(suite) {
     .add('Monkberry', () => {
       view.update(data());
     })
-    .add('React', () => {
-      reactComponent.setState(data());
+    .add('React', {
+      defer: true,
+      fn: deferred => {
+        reactComponent.setState(data(), () => {
+          deferred.resolve();
+        });
+      }
     })
     .add('Vue', {
-      'defer': true,
-      'fn': deferred => {
-        vueComponent.$data = data();
+      defer: true,
+      fn: deferred => {
+        vueComponent.data = data();
         Vue.nextTick(() => {
            deferred.resolve();
         });
