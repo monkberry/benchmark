@@ -1,95 +1,95 @@
 <template>
-  <div class="ticket-outer-wrap" data-rating="{{ ticket_rating }}">
-      <div class="highlight-plate {{ highlight_info.plate_class }}" v-if="highlight_info">{{ highlight_info.text }}
+  <div class="ticket-outer-wrap" :data-rating="data.ticket_rating">
+      <div v-if="data.highlight_info" :class="['highlight-plate', data.highlight_info.plate_class]">{{ data.highlight_info.text }}
           <span class="inline-block">
-              {{ highlight_info.price_in_currency }}&nbsp;<span
-                      class="currency-code {{ highlight_info.currency }}"></span>
+              {{ data.highlight_info.price_in_currency }}&nbsp;<span
+                      :class="['currency-code', data.highlight_info.currency]"></span>
           </span>
       </div>
-      <div class="ticket js-ticket" :class="[ticket_type_class, highlight_class, opened_class, expired_class]"
-           data-index="{{ index }}">
-          <div class="ticket-buy-block" v-if="main_proposal">
-              <a class="js-buy-button" data-metainfo="{{ main_proposal.metainfo }}" data-ticket-index="{{ index }}"
-                 href="{{ main_proposal.deeplink }}" target="_blank">
-                  <div class="price-block {{ expired_price_class }}">
+      <div class="ticket js-ticket" :class="[data.icket_type_class, data.highlight_class, data.opened_class, data.expired_class]"
+           :data-index="data.index">
+          <div v-if="data.main_proposal" class="ticket-buy-block">
+              <a class="js-buy-button" :data-metainfo="data.main_proposal.metainfo" :data-ticket-index="data.index"
+                 :href="data.main_proposal.deeplink" target="_blank">
+                  <div class="price-block">
                       <span class="ticket-main-price">
-                          {{ main_proposal.price }}
+                          {{ data.main_proposal.price }}
                       </span>
                   </div>
                   <button class="button ticket-buy-button orange-button">
                       <div class="semibold book-now">
-                          {{ main_button_text }}
+                          {{ data.main_button_text }}
                       </div>
-                      <div class="main-proposal-name">Buy on &nbsp;{{ main_proposal.name }}</div>
+                      <div class="main-proposal-name">Buy on &nbsp;{{ data.main_proposal.name }}</div>
                   </button>
 
-                  <div class="poposal-original-gate-price-tooltip {{ main_proposal_original_gate_price.expired_price_class }} js-main-original-price" v-if="main_proposal_original_gate_price">
+                  <div v-if="data.main_proposal.original_gate_price" class="poposal-original-gate-price-tooltip js-main-original-price">
                       <span class="tooltip-price-wrap">
-                          {{ main_proposal_original_gate_price.price }}
-                          <span class="currency-code {{ main_proposal_original_gate_price.currency }}"> {{ main_proposal_original_gate_price.currency_text }} </span>
+                          {{ data.main_proposal.original_gate_price.price }}
+                          <span :class="['currency-code', data.main_proposal.original_gate_price.currency]"> {{ data.main_proposal.original_gate_price.currency_text }} </span>
                       </span>
                   </div>
 
               </a>
-              <a href="{{ airline_without_price.deeplink }}" v-if="airline_without_price" target="_blank"
+              <a v-if="data.airline_without_price" :href="data.airline_without_price.deeplink" target="_blank"
                  class="clearfix ticket-proposals js-proposal-link airline-proposal"
-                 data-metainfo="{{ airline_without_price.metainfo }}" data-original-index="1"
-                 data-ticket-index="{{ airline_without_price.ticket_index }}" data-proposal-index="1">
-                      <span class="left proposal-name" title="{{ airline_without_price.name }}">
-                          {{ airline_without_price.name }}
+                 :data-metainfo="data.airline_without_price.metainfo" data-original-index="1"
+                 :data-ticket-index="data.airline_without_price.ticket_index" data-proposal-index="1">
+                      <span class="left proposal-name" :title="data.airline_without_price.name">
+                          {{ data.airline_without_price.name }}
                           <span class="ticket-proposals-border-bottom"></span>
                       </span>
               </a>
-              <a href="{{ proposal.deeplink }}" target="_blank" v-for="proposal in proposals"
-                 class="clearfix ticket-proposals js-proposal-link {{ proposal.airline_proposal }}"
-                 data-metainfo="{{ proposal.metainfo }}" data-original-index="{{ proposal.original_index }}"
-                 data-ticket-index="{{ proposal.ticket_index }}" data-proposal-index="{{ proposal.proposal_index }}">
-                  <span class="left proposal-name" title="{{ proposal.name }}">{{ name }}</span>
-                      <span class="right price-container--{{ proposal.currency }}">
+              <a v-for="proposal in data.proposals" :href="proposal.deeplink" target="_blank"
+                 :class="['clearfix ticket-proposals', 'js-proposal-link', proposal.airline_proposal]"
+                 :data-metainfo="proposal.metainfo" :data-original-index="proposal.original_index"
+                 :data-ticket-index="proposal.ticket_index" :data-proposal-index="proposal.proposal_index">
+                  <span class="left proposal-name" :title="proposal.name">{{ proposal.name }}</span>
+                      <span :class="['right', 'price-container--' + proposal.currency]">
                           <span class="button-price">{{ proposal.price }}
-                              <span class="currency-code {{ proposal.currency }}"></span>
+                              <span :class="['currency-code', proposal.currency]"></span>
                           </span>
                       </span>
                       <span class="hidden">
                           <!-- Dafuque is that? -->
-                          <div class="poposal-original-gate-price-tooltip" v-if="proposal.original_gate_price">
-                              <span class="tooltip-price-wrap">{{ proposal.price }}
-                                  <span class="currency-code {{ proposal.currency }}"> {{ proposal.currency_text }} </span>
+                          <div v-if="proposal.original_gate_price" class="poposal-original-gate-price-tooltip">
+                              <span class="toolip-price-wrap">{{ proposal.price }}
+                                  <span :class="['currency-code', proposal.currency]"> {{ proposal.currency_text }} </span>
                               </span>
                           </div>
                       </span>
                   <span class="ticket-proposals-border-bottom"></span>
               </a>
 
-              <span data-index="{{ proposals_count.ticket_index }}" v-if="proposals_count"
-                    class="js-more-proposals ticket-proposals more-proposals">{{ proposals_count.value }}</span>
+              <span v-if="data.proposals_count" :data-index="data.proposals_count.ticket_index"
+                    class="js-more-proposals ticket-proposals more-proposals">{{ data.proposals_count.value }}</span>
           </div>
 
           <div class="ticket-info-block">
 
-              <div class="ticket-main-info js-ticket-info" data-index="{{ index }}">
+              <div class="ticket-main-info js-ticket-info" :data-index="data.index">
                   <div class="ticket-top-block">
                       <!-- Main Airline logo -->
-                      <a class="js-logo-button" href="{{ logo_deeplink }}" data-metainfo="{{ logo_metainfo }}"
-                         target="_blank" data-ticket-index="{{ index }}" data-proposal-index="{{ logo_proposal_index }}">
+                      <a class="js-logo-button" :href="data.logo_deeplink" :data-metainfo="data.logo_metainfo"
+                         target="_blank" :data-ticket-index="data.index" :data-proposal-index="data.logo_proposal_index">
                           <img class="main-airline-logo js-ticket-logo"
-                               src="http://pics.avs.io/112/50/{{ carrier_code }}@2x.png" width="112"
+                               :src="'http://pics.avs.io/112/50/' + data.carrier_code + '@2x.png'" width="112"
                                height="50"/>
                       </a>
                       <!--  ¯\_(ツ)_/¯ -->
                       <div class="top-info">
-                          <div class="change-airports-label" v-if="change_airports">
+                          <div v-if="data.change_airports" class="change-airports-label">
                               <div class="icon icon-change"></div>
                               <span class="name g-uppercase semibold">Change airports</span>
                           </div>
-                          <div class="best-ticket-label {{ best_by }}" v-if="best_by">
+                          <div v-if="data.best_by" :class="['best-ticket-label', data.best_by]">
                               <div class="icon icon-label-corner"></div>
-                              <span class="name g-uppercase semibold">{{ best_ticket_label }}</span>
+                              <span class="name g-uppercase semibold">{{ data.best_ticket_label }}</span>
                           </div>
                       </div>
                   </div>
                   <div class="ticket-segments">
-                      <div class="segment-block" v-for="segment in segments">
+                      <div v-for="segment in data.segments" class="segment-block">
                           <div class="flight-depart-info">
                               <div class="flight-place-title">
                                   <span class="semibold">{{ segment.mini.departure_iata }}</span>
@@ -99,14 +99,14 @@
                               <div class="flight-date-time">
                                   <div class="flight-time">{{ segment.mini.depart_time }}</div>
                                   <div class="flight-date-wrapper">
-                                          <p class="meridiem semibold" v-if="segment.mini.depart_meridiem">{{ segment.mini.depart_meridiem }}</p>
+                                          <p v-if="segment.mini.depart_meridiem" class="meridiem semibold">{{ segment.mini.depart_meridiem }}</p>
                                       <p class="flight-date">{{ segment.mini.depart_date }}</p>
                                   </div>
                               </div>
                           </div>
 
                           <div class="flight-duration-info">
-                              <div class="stops-info {{ segment.mini.stop_text_class }}">{{ segment.mini.stops_info }}</div>
+                              <div :class="['stops-info', segment.mini.stop_text_class]">{{ segment.mini.stops_info }}</div>
                               <div class="icon icon-departing-plane"></div>
                               <div class="flight-duration">{{ segment.mini.duration }}</div>
                           </div>
@@ -119,7 +119,7 @@
                               </div>
                               <div class="flight-date-time">
                                   <div class="flight-date-wrapper">
-                                          <div class="meridiem semibold" v-if="segment.mini.arrival_meridiem">{{ segment.mini.arrival_meridiem }}</div>
+                                          <div v-if="segment.mini.arrival_meridiem" class="meridiem semibold">{{ segment.mini.arrival_meridiem }}</div>
                                       <div class="flight-date">{{ segment.mini.arrival_date }}</div>
                                   </div>
                                   <div class="flight-time">{{ segment.mini.arrival_time }}</div>
@@ -127,28 +127,28 @@
                           </div>
                       </div>
                   </div>
-                  <div class="open-ticket-button {{ opened_class }} js-open-ticket-button">
+                  <div :class="['open-ticket-button', 'js-open-ticket-button', data.opened_class]">
                       <div class="open-ticket-arrow"></div>
                   </div>
-                  <div class="js-ticket-tag" id="{{ div_id }}" v-if="ticket_google_tag"></div>
+                  <div v-if="data.ticket_google_tag" class="js-ticket-tag" :id="data.ticket_google_tag.div_id"></div>
               </div>
-              <div class="ticket-details {{ opened_class }}">
-                  <template v-for="segment in segments">
+              <div :class="['ticket-details', data.opened_class]">
+                  <template v-for="segment in data.segments">
                       <div class="segment-container">
                           <div class="direction-title">
                               {{ segment.direction_text }}
                           </div>
-                          <div class="segment-flights {{ segment.direction_class }} {{ segment.mini.stop_text_class }}">
+                          <div :class="['segment-flights', segment.direction_class, segment.mini.stop_text_class]">
 
                               <template v-for="flight in segment.flights">
-                                  <div class="flight-stop clearfix" v-if="flight.stop">
-                                      <div class="flight-stop-icon {{ flight.stop.icon }}"></div>
-                                      <div class="flight-layover-airport semibold left" v-if="flight.stop.change_airports">
+                                  <div v-if="flight.stop" class="flight-stop clearfix">
+                                      <div :class="['flight-stop-icon', flight.stop.icon]"></div>
+                                      <div v-if="flight.stop.change_airports" class="flight-layover-airport semibold left">
                                           <div class="icon icon-change"></div>
                                           {{ 'Airport_change ' + flight.stop.change_airports.arrival_airport }}
                                           <div class="icon icon-direction-arrow"></div>{{ flight.stop.change_airports.depart_airport }}
                                       </div>
-                                      <div class="flight-layover-airport semibold left" v-if="flight.stop.same_airport_layover">{{ 'Stop at ' + flight.stop.same_airport_layover.title }}</div>
+                                      <div v-if="flight.stop.same_airport_layover" class="flight-layover-airport semibold left">{{ 'Stop at ' + flight.stop.same_airport_layover.title }}</div>
                                       <div class="flight-duration semibold right">
                                           {{ flight.stop.duration }}
                                       </div>
@@ -158,18 +158,18 @@
                                       <div class="airline-info clearfix">
                                           <div class="airline-logo-container left">
                                               <img class="airline-logo-image js-ticket-logo" width="32" height="32"
-                                                   src="http://pics.jetradar.com/al_square/32/32/{{ carrier_code }}@2x.png"/>
+                                                   :src="'http://pics.jetradar.com/al_square/32/32/' + flight.carrier_code + '@2x.png'"/>
                                           </div>
                                           <div class="airline-details left">
-                                              <span class="semibold">{{ carrier_name }}</span>
+                                              <span class="semibold">{{ flight.carrier_name }}</span>
                                               <span class="middot">&middot;</span>
-                                              <span> {{ carrier_number }} </span>
-                                              <div class="legroom" v-if="legroom">
-                                                  Legroom&nbsp;{{ legroom }}&nbsp;cm
+                                              <span> {{ flight.carrier_number }} </span>
+                                              <div v-if="flight.legroom" class="legroom">
+                                                  Legroom&nbsp;{{ flight.legroom }}&nbsp;cm
                                               </div>
                                           </div>
                                           <div class="airline-features right">
-                                              <div class="icon icon-wifi" v-if="wifi">
+                                              <div v-if="flight.wifi" class="icon icon-wifi">
                                                   <svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg">
                                                       <defs></defs>
                                                       <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -189,7 +189,7 @@
                                                       Wi-Fi
                                                   </div>
                                               </div>
-                                              <div class="icon icon-laptop-power" v-if="laptopPower">
+                                              <div v-if="flight.laptopPower" class="icon icon-laptop-power">
                                                   <svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg">
                                                       <defs></defs>
                                                       <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -211,36 +211,36 @@
 
                                           <div class="segment-depart">
                                               <div class="segment-info-title semibold">
-                                                  {{ depart_iata }}
+                                                  {{ flight.depart_iata }}
                                               </div>
                                               <div class="segment-info-name g-text-overflow">
-                                                  {{ depart_airport }}
+                                                  {{ flight.depart_airport }}
                                               </div>
                                               <div class="segment-info-date">
                                                   <span class="time semibold">
-                                                      {{ depart_time }}
+                                                      {{ flight.depart_time }}
                                                   </span>
                                                   &nbsp;
                                                   <span class="date">
-                                                      {{ depart_date }}
+                                                      {{ flight.depart_date }}
                                                   </span>
                                               </div>
                                               <div class="icon icon-plane"></div>
                                           </div>
                                           <div class="segment-arrive">
                                               <div class="segment-info-title semibold">
-                                                  {{ arrival_iata }}
+                                                  {{ flight.arrival_iata }}
                                               </div>
                                               <div class="segment-info-name g-text-overflow">
-                                                  {{ arrival_airport }}
+                                                  {{ flight.arrival_airport }}
                                               </div>
                                               <div class="segment-info-date">
                                                   <span class="time semibold">
-                                                      {{ arrival_time }}
+                                                      {{ flight.arrival_time }}
                                                   </span>
                                                   &nbsp;
                                                   <span class="date">
-                                                      {{ arrival_date }}
+                                                      {{ flight.arrival_date }}
                                                   </span>
                                               </div>
                                           </div>
@@ -249,7 +249,7 @@
                                               <div class="segment-info-name g-text-overflow">
                                                   Duration
                                               </div>
-                                              <div class="segment-info-date semibold">{{ duration }}</div>
+                                              <div class="segment-info-date semibold">{{ flight.duration }}</div>
                                           </div>
                                       </div>
 
@@ -260,18 +260,22 @@
                   </template>
               </div>
           </div>
-          <div class="ticket-sharing-block {{ opened_class }}">
+          <div :class="['ticket-sharing-block', data.opened_class]">
               <div class="copy-link-text js-copy-link-text">Share link</div>
-              <input type="text" class="copy-link-input js-copy-link-input" readonly="readonly" value="{{ url }}"/>
+              <input type="text" class="copy-link-input js-copy-link-input" readonly="readonly" :value="data.url"/>
           </div>
       </div>
   </div>
 </template>
 
 <script>
+import data from './data'
+
 export default {
   data () {
-    return {}
+    return {
+      data: data()
+    }
   }
 }
 </script>

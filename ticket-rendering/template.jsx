@@ -1,6 +1,10 @@
 var React = require('react');
+var data = require('./data').default;
 
 module.exports = React.createClass({
+  getInitialState: function () {
+    return data()
+  },
   render: function () {
     let data = this.state;
     if(!data) {
