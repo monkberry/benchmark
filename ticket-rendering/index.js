@@ -5,6 +5,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactComponent from './template.jsx';
 
+import Inferno from 'inferno';
+import InfernoDOM from 'inferno-dom';
+import InfernoComponent from './template.inferno.js';
+
 import Vue from 'vue';
 import VueComponent from './template.vue';
 
@@ -14,25 +18,29 @@ import data from './data';
 export function getSuite1(suite) {
   return suite
     .add('Monkberry', () => {
-      let root = document.createElement('div');
-      let view = Monkberry.render(Template, root);
+      const root = document.createElement('div');
+      const view = Monkberry.render(Template, root);
       view.update(data());
     })
     .add('React', {
       defer: true,
       fn: deferred => {
-        let root = document.createElement('div');
+        const root = document.createElement('div');
         ReactDOM.render(React.createElement(ReactComponent), root, () => {
           deferred.resolve();
         });
       }
     })
+    .add('Inferno', () => {
+      const root = document.createElement('div');
+      InfernoDOM.render(Inferno.createVNode().setTag(InfernoComponent).setAttrs(data()), root);
+    })
     .add('Vue', () => {
-      let root = document.createElement('div');
+      const root = document.createElement('div');
       new Vue(VueComponent).$mount(root);
     })
     .add('Template string', () => {
-      let root = document.createElement('div');
+      const root = document.createElement('div');
       root.innerHTML = templateString(data());
     });
 }
@@ -42,10 +50,12 @@ export function getSuite2(suite) {
   let root2 = document.createElement('div');
   let root3 = document.createElement('div');
   let root4 = document.createElement('div');
+  let root5 = document.createElement('div');
   let view = Monkberry.render(Template, root1);
   let reactComponent = ReactDOM.render(React.createElement(ReactComponent), root2);
   let vueComponent = new Vue(VueComponent).$mount(root3);
   root4.innerHTML = templateString(data());
+  InfernoDOM.render(Inferno.createVNode().setTag(InfernoComponent).setAttrs(data()), root5);
 
   return suite
     .add('Monkberry', () => {
@@ -68,6 +78,9 @@ export function getSuite2(suite) {
         });
       }
     })
+    .add('Inferno', () => {
+      InfernoDOM.render(Inferno.createVNode().setTag(InfernoComponent).setAttrs(data()), root5);
+    })    
     .add('Template string', () => {
       root4.innerHTML = templateString(data());
     });

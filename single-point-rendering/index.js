@@ -1,6 +1,10 @@
 import Monkberry from 'monkberry';
 import Template from './template.monk';
 
+import Inferno from 'inferno';
+import InfernoDOM from 'inferno-dom';
+import InfernoComponent from './template.inferno.js';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactComponent from './template.jsx';
@@ -15,11 +19,13 @@ export function getSuite1(suite) {
   let root2 = document.createElement('div');
   let root3 = document.createElement('div');
   let root4 = document.createElement('div');
+  let root5 = document.createElement('div');
 
   let view = Monkberry.render(Template, root1);
   let reactComponent = ReactDOM.render(React.createElement(ReactComponent), root2);
   let vueComponent = new Vue(VueComponent).$mount(root3);
   root4.innerHTML = templateString(data());
+  InfernoDOM.render(Inferno.createVNode().setTag(InfernoComponent).setAttrs(data()), root5);
 
   return suite
     .add('Monkberry', () => {
@@ -41,6 +47,9 @@ export function getSuite1(suite) {
            deferred.resolve();
         });
       }
+    })
+    .add('Inferno', () => {
+      InfernoDOM.render(Inferno.createVNode().setTag(InfernoComponent).setAttrs(data()), root5);
     })
     .add('Template string', () => {
       root4.innerHTML = templateString(data());
