@@ -7,7 +7,7 @@ import ReactComponent from './template.jsx';
 
 import Inferno from 'inferno';
 import InfernoDOM from 'inferno-dom';
-import InfernoComponent from './template.inferno.js';
+import renderInferno from './template.inferno.js';
 
 import Vue from 'vue';
 import VueComponent from './template.vue';
@@ -31,13 +31,13 @@ export function getSuite1(suite) {
         });
       }
     })
-    .add('Inferno', () => {
-      const root = document.createElement('div');
-      InfernoDOM.render(Inferno.createVNode().setTag(InfernoComponent).setAttrs(data()), root);
-    })
     .add('Vue', () => {
       const root = document.createElement('div');
       new Vue(VueComponent).$mount(root);
+    })
+    .add('Inferno', () => {
+      const root = document.createElement('div');
+      InfernoDOM.render(renderInferno(data()), root);
     })
     .add('Template string', () => {
       const root = document.createElement('div');
@@ -55,7 +55,7 @@ export function getSuite2(suite) {
   let reactComponent = ReactDOM.render(React.createElement(ReactComponent), root2);
   let vueComponent = new Vue(VueComponent).$mount(root3);
   root4.innerHTML = templateString(data());
-  InfernoDOM.render(Inferno.createVNode().setTag(InfernoComponent).setAttrs(data()), root5);
+  InfernoDOM.render(renderInferno(data()), root5);
 
   return suite
     .add('Monkberry', () => {
@@ -79,8 +79,8 @@ export function getSuite2(suite) {
       }
     })
     .add('Inferno', () => {
-      InfernoDOM.render(Inferno.createVNode().setTag(InfernoComponent).setAttrs(data()), root5);
-    })    
+      InfernoDOM.render(renderInferno(data()), root5);
+    })
     .add('Template string', () => {
       root4.innerHTML = templateString(data());
     });

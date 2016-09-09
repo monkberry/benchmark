@@ -1,16 +1,18 @@
 var Inferno = require('inferno');
 
+var ChildrenTypes = Inferno.ChildrenTypes;
+
 module.exports = function(props) {
 	if (props) {
 		var todos = props.todos;
 		return (
-			<ol>
+			<ol childrenType={ ChildrenTypes.NON_KEYED }>
 				{todos.map((todo, i) =>
-					<li key={i}>
+					<li childrenType={ ChildrenTypes.NODE }>
 						{todo.complete ?
-						<s>{todo.title}</s>
+						<s childrenType={ ChildrenTypes.TEXT }>{todo.title}</s>
 						:
-						<b>{todo.title}</b>
+						<b childrenType={ ChildrenTypes.TEXT }>{todo.title}</b>
 						}
 					</li>
 				)}
