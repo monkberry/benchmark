@@ -97,13 +97,13 @@ module.exports = function (data) {
 							</a>
 							<div className="top-info" childrenType={ ChildrenTypes.NON_KEYED }>
 								{data.change_airports ?
-									<div className="change-airports-label" childrenType={ ChildrenTypes.NON_KEYED }>
+									<div className="change-airports-label">
 										<div className="icon icon-change"></div>
 										<span className="name g-uppercase semibold">Change airports</span>
 									</div>
 									: createVPlaceholder()}
 								{data.best_by ?
-									<div className={"best-ticket-label " + data.best_by} childrenType={ ChildrenTypes.NON_KEYED }>
+									<div className={"best-ticket-label " + data.best_by}>
 										<div className="icon icon-label-corner"></div>
 										<span className="name g-uppercase semibold" childrenType={ ChildrenTypes.TEXT }>{data.best_ticket_label}</span>
 									</div>
@@ -210,14 +210,14 @@ module.exports = function (data) {
 													</div>
 													<div className="airline-features right" childrenType={ ChildrenTypes.NON_KEYED }>
 														{flight.wifi ?
-															<span childrenType={ ChildrenTypes.NON_KEYED }>
-																<div className="icon icon-wifi" childrenType={ ChildrenTypes.NODE }>
-																	<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" childrenType={ ChildrenTypes.NON_KEYED }>
+															<span>
+																<div className="icon icon-wifi">
+																	<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg">
 																		<defs></defs>
-																		<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" childrenType={ ChildrenTypes.NODE }>
-																			<g id="Oval-5-+-Group" transform="translate(1.000000, 1.000000)" childrenType={ ChildrenTypes.NON_KEYED }>
+																		<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																			<g id="Oval-5-+-Group" transform="translate(1.000000, 1.000000)">
 																				<circle id="Oval-5" stroke="#DEE4EA" fill="#FFFFFF" cx="12" cy="12" r="12"></circle>
-																				<g id="Group" transform="translate(6.000000, 7.000000)" fill="#464A4D" childrenType={ ChildrenTypes.NON_KEYED }>
+																				<g id="Group" transform="translate(6.000000, 7.000000)" fill="#464A4D">
 																					<path
 																						d="M11.1135,3.72 C10.9171875,3.72 10.720875,3.6451875 10.5710625,3.4951875 C9.3500625,2.2741875 7.726875,1.601625 6,1.601625 C4.2733125,1.601625 2.64975,2.274 1.42875,3.495 C1.129125,3.7948125 0.6435,3.7948125 0.343875,3.495 C0.04425,3.1955625 0.04425,2.7099375 0.343875,2.4103125 C1.85475,0.899625 3.8634375,0.0676875 6,0.0676875 C8.1365625,0.0676875 10.14525,0.8998125 11.6559375,2.4105 C11.9555625,2.710125 11.9555625,3.19575 11.6559375,3.4951875 C11.5063125,3.645 11.3098125,3.72 11.1135,3.72 L11.1135,3.72 Z"
 																						id="Shape"></path>
@@ -232,18 +232,18 @@ module.exports = function (data) {
 																		</g>
 																	</svg>
 																</div>
-																<div className="tooltip default top tooltip-airline-feature wifi" childrenType={ ChildrenTypes.NODE }>
+																<div className="tooltip default top tooltip-airline-feature wifi">
 																	<div className="tooltip-title">Wi-Fi</div>
 																</div>
 															</span>
 															: createVPlaceholder()}
 														{flight.laptopPower ?
-															<span childrenType={ ChildrenTypes.NON_KEYED }>
-																<div className="icon icon-laptop-power" childrenType={ ChildrenTypes.NODE }>
-																	<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" childrenType={ ChildrenTypes.NON_KEYED }>
+															<span>
+																<div className="icon icon-laptop-power">
+																	<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg">
 																		<defs></defs>
-																		<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" childrenType={ ChildrenTypes.NODE }>
-																			<g id="Group" transform="translate(1.000000, 1.000000)" childrenType={ ChildrenTypes.NON_KEYED }>
+																		<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																			<g id="Group" transform="translate(1.000000, 1.000000)">
 																				<circle id="Oval-5" stroke="#DEE4EA" fill="#FFFFFF"
 																					cx="12" cy="12" r="12"></circle>
 																				<path
