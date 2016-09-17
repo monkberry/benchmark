@@ -1,4 +1,5 @@
 var Inferno = require('inferno');
+var InfernoDOM = require('inferno-dom');
 
 var ChildrenTypes = Inferno.ChildrenTypes;
 var createVFragment = Inferno.createVFragment;

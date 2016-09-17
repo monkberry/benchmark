@@ -1,4 +1,5 @@
 var Inferno = require('inferno');
+var InfernoDOM = require('inferno-dom');
 
 module.exports = function(props) {
   if (props) {
